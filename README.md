@@ -6,6 +6,7 @@ It also includes in the process some of the more common SDK130 layers (nwell, di
 Here's a reference of the SKY130 GDS layer/datatype ids in case you need to add other layers to the process:
 https://skywater-pdk.readthedocs.io/en/main/rules/layers.html#gds-layers-information
 
+![Example](gdsiistl_example.png)
 
 Original gdsiistl README file:
 
