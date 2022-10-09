@@ -29,38 +29,36 @@ if len(sys.argv) < 2: # sys.argv[0] is the name of the program
     sys.exit(0)
 gdsii_file_path = sys.argv[1]
 
+
 ########## CONFIGURATION (EDIT THIS PART) #####################################
 
-# choose which GDSII layers to use
+# Choose which GDSII layers to use
+# Layer scaling is 1:1e6, which means 1 um in GDSII = 1 m in STL
+# Layer dimensions according to https://skywater-pdk.readthedocs.io/en/main/rules/assumptions.html
+
 layerstack = {
     # (layernumber, datatype) : (zmin, zmax, 'layername'),
-    
-    (235,4): (0, 0.1, 'substrate'),
 
-    (64,20): (0, 0.1, 'nwell'),    
-    (65,44): (0, 0.1, 'tap'),    
-    (65,20): (0, 0.1, 'diff'),    
-    (66,20): (0, 0.1, 'poly'),    
-    (66,44): (0, 0.1, 'licon'),    
-    (67,20): (0, 0.1, 'li1'),    
-    (67,44): (0, 0.1, 'mcon'),    
-    (68,20): (0, 0.1, 'met1'),    
-    (68,44): (0, 0.1, 'via'),    
-    (69,20): (0, 0.1, 'met2'),    
-    (69,44): (0, 0.1, 'via2'),    
-    (70,20): (0, 0.1, 'met3'),    
-    (70,44): (0, 0.1, 'via3'),    
-    (71,20): (0, 0.1, 'met4'),    
-    (71,44): (0, 0.1, 'via4'),    
-    (72,20): (0, 0.1, 'met5'),
+    (235,4): (-1.0, 0.0, 'substrate'), # Set substrate surface zmax to 0
+    (64,20): (-1.0, 0.0001, 'nwell'), # Raise by 0.0001 to be rendered above substrate
+    (65,20): (-0.12, 0.0002, 'diff'), # Raise by 0.0002 to be rendered above nwell
+    (65,44): (0, 0.1, 'tap'),
+    (66,20): (0.1, 0.1 + 0.18, 'poly'),
+
+    (66,44): (0.0, 0.0 + 0.9361, 'licon'),
+    (67,20): (0.9361, 0.9361 + 0.1, 'li1'),
+    (67,44): (1.0111, 1.3761 - 1.0111, 'mcon'),
+    (68,20): (1.3761, 1.3761 + 0.36, 'met1'),
+    (68,44): (2.0061, 2.0061 - 1.3761, 'via'),
+    (69,20): (2.0061, 2.0061 + 0.36, 'met2'),
+    (69,44): (2.7861, 2.7861 - 0.42, 'via2'),
+    (70,20): (2.7861, 2.7861 + 0.845, 'met3'),
+    (70,44): (4.0211, 4.0211 - 0.39, 'via3'),
+    (71,20): (4.0211, 4.0211 + 0.845, 'met4'),
+    (71,44): (5.3711, 5.3711 - 0.505, 'via4'),
+    (72,20): (5.3711, 5.3711 + 1.26, 'met5'),
     # (83,44): (0, 0.1, 'text'),
-
-
-
 }
-
-
-
 
 
 ########## INPUT ##############################################################
